@@ -9,5 +9,5 @@ Use one validation for client and server side.
 
 ## Development
 
-- Run `npm run dev:prepare` to generate type stubs.
-- Use `npm run dev` to start [playground](./playground) in development mode.
+- Run `pnpm dev` to generate type stubs.
+- Use `pnpm dev` to start tests in watch mode for development.
