@@ -1,5 +1,6 @@
 {
-  "name": "@antify/ant-validate",
+  "name": "@antify/validate",
+  "private": false,
   "version": "1.0.0",
   "description": "",
   "license": "MIT",
@@ -34,5 +35,15 @@
     "unbuild": "latest",
     "vitest": "latest"
   },
-  "packageManager": "pnpm@7.0.0"
+  "packageManager": "pnpm@7.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antify/validate.git"
+  },
+  "engines": {
+    "node": ">=0.14"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
