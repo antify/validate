@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "latest",
+    "@vue/reactivity": "^3.3.4",
     "c8": "latest",
     "eslint": "latest",
     "standard-version": "latest",

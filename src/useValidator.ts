@@ -1,3 +1,5 @@
+import { Ref } from '@vue/reactivity';
+
 export class Validator {
   readonly ruleMap: Record<string, Function[]>;
   errorMap: Record<string, string[]> = {};
@@ -6,7 +8,7 @@ export class Validator {
     this.ruleMap = ruleMap;
   }
 
-  validate(data: unknown, errorLimitPerProperty: number | null = null) {
+  validate(data: Record<string, unknown | Ref<unknown>>, errorLimitPerProperty: number | null = null) {
     this.errorMap = {};
 
     Object.keys(this.ruleMap).forEach((key: string) => {
@@ -20,7 +22,7 @@ export class Validator {
 
   validateProperty(
     property: string,
-    data: unknown,
+    data: unknown | Ref<unknown>,
     errorLimit: number | null = null
   ) {
     if (!this.ruleMap[property]) {
@@ -30,7 +32,7 @@ export class Validator {
     delete this.errorMap[property];
 
     this.ruleMap[property].every((ruleFunction) => {
-      const errorMessage = ruleFunction(data);
+      const errorMessage = ruleFunction(data.value || data);
       const hasError = typeof errorMessage === "string";
 
       if (hasError) {
@@ -62,6 +64,11 @@ export class Validator {
     return errorList;
   }
 
+  getErrorsOfProperty(property: string): string {
+    // TODO:: implement me
+    return "";
+  }
+
   getErrorsAsString(): string {
     const delimiter = "\n- ";
     let stringMessage = "";
@@ -71,11 +78,6 @@ export class Validator {
     );
 
     return stringMessage;
-  }
-
-  getErrorsOfProperty(property: string): string {
-    // TODO:: implement me
-    return "";
   }
 }
 
