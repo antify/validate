@@ -32,7 +32,7 @@ export class Validator {
     delete this.errorMap[property];
 
     this.ruleMap[property].every((ruleFunction) => {
-      const errorMessage = ruleFunction(data.value || data);
+      const errorMessage = ruleFunction(data?.value || data);
       const hasError = typeof errorMessage === "string";
 
       if (hasError) {
