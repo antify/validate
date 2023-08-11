@@ -1,5 +1,6 @@
 import { describe, test, expect, beforeEach } from "vitest";
 import { useValidator, Validator } from "../useValidator";
+import { ref } from '@vue/reactivity';
 
 describe("Validator test", async () => {
   let validator: Validator;
@@ -30,6 +31,22 @@ describe("Validator test", async () => {
     });
 
     expect(validator.getErrors()).toStrictEqual(["Message", "Message"]);
+  });
+
+  test("should validate reactive types correctly", () => {
+    const _validator = useValidator({
+      truthly: [(val) => val === true],
+      falshy: [(val) => val === false],
+    });
+    const truthly = ref(true);
+    const falshy = ref(false);
+
+    _validator.validate({
+      truthly,
+      falshy,
+    });
+
+    expect(_validator.hasErrors()).toBeFalsy();
   });
 
   test("should validate all properties with object as param only", () => {

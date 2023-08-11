@@ -8,7 +8,7 @@ export class Validator {
     this.ruleMap = ruleMap;
   }
 
-  validate(data: Record<string, unknown | Ref<unknown>>, errorLimitPerProperty: number | null = null) {
+  validate(data: Record<string, unknown | { value: unknown }>, errorLimitPerProperty: number | null = null) {
     this.errorMap = {};
 
     Object.keys(this.ruleMap).forEach((key: string) => {
@@ -22,7 +22,7 @@ export class Validator {
 
   validateProperty(
     property: string,
-    data: unknown | Ref<unknown>,
+    data: any | { value: unknown },
     errorLimit: number | null = null
   ) {
     if (!this.ruleMap[property]) {
