@@ -1,97 +1,48 @@
-import { describe, test, expect, beforeEach } from "vitest";
-import { useValidator, Validator } from "../useValidator";
-import { ref } from '@vue/reactivity';
+import { describe, test, expect, beforeEach } from 'vitest'
+import { ref } from 'vue'
+import { useValidator, Validator } from '../useValidator'
 
-describe("Validator test", async () => {
-  let validator: Validator;
+describe('Validator test', () => {
+  let validator: Validator
 
   beforeEach(() => {
-    validator = useValidator({
-      truthly: [() => true, () => true, () => true],
-      falshy: [() => "Message"],
-      truthlyAndFalshy: [() => "Message", () => true],
-      dynamic: [(val: unknown) => val === true || "Message"],
-    });
-  });
+    validator = useValidator([
+      (val: unknown) => val === true || 'Message',
+      (val: unknown) => val === true || 'Message'
+    ])
+  })
 
-  test("should validate a property correctly", () => {
-    validator.validateProperty("truthly", true);
-    expect(validator.getErrors()).toStrictEqual([]);
+  test('should validate correctly', () => {
+    validator.validate(true)
+    expect(validator.getErrors()).toStrictEqual([])
+    expect(validator.hasErrors()).toBeFalsy()
 
-    validator.validateProperty("falshy", true);
-    expect(validator.getErrors()).toStrictEqual(["Message"]);
-  });
+    validator.validate(false)
+    expect(validator.getErrors()).toStrictEqual(['Message', 'Message'])
+    expect(validator.getErrorsAsString()).toStrictEqual('- Message\n- Message')
+    expect(validator.hasErrors()).toBeTruthy()
+  })
 
-  test("should validate all properties correctly", () => {
-    validator.validate({
-      truthly: true,
-      falshy: true,
-      truthlyAndFalshy: true,
-      dynamic: true,
-    });
+  test('should validate with one rule as param correctly', () => {
+    const singleRuleValidator = useValidator((val: unknown) => val === true || 'Message')
 
-    expect(validator.getErrors()).toStrictEqual(["Message", "Message"]);
-  });
+    singleRuleValidator.validate(true)
+    expect(singleRuleValidator.getErrors()).toStrictEqual([])
+    expect(singleRuleValidator.hasErrors()).toBeFalsy()
 
-  test("should validate reactive types correctly", () => {
-    const _validator = useValidator({
-      truthly: [(val) => val === true],
-      falshy: [(val) => val === false],
-    });
-    const truthly = ref(true);
-    const falshy = ref(false);
+    singleRuleValidator.validate(false)
+    expect(singleRuleValidator.getErrors()).toStrictEqual(['Message'])
+    expect(singleRuleValidator.hasErrors()).toBeTruthy()
+  })
 
-    _validator.validate({
-      truthly,
-      falshy,
-    });
+  test('should validate reactive types correctly', () => {
+    const truthy = ref(true)
+    const falsy = ref(false)
 
-    expect(_validator.hasErrors()).toBeFalsy();
-  });
+    validator.validate(truthy)
+    expect(validator.hasErrors()).toBeFalsy()
 
-  test("should validate all properties with object as param only", () => {
-    expect.assertions(5);
-
-    [true, "string", 0, 0.0, []].forEach((val: unknown) => {
-      try {
-        validator.validate(val);
-      } catch (e) {
-        expect(e.message).toBe(`Can not validate data of type ${typeof val}`);
-      }
-    });
-  });
-
-  test("should not validate a not existing property", () => {
-    expect.assertions(1);
-
-    try {
-      validator.validateProperty("notExistingOne", true);
-    } catch (e) {
-      expect(e.message).toBe("There is no rule for property notExistingOne");
-    }
-  });
-
-  test("should validate one rule only with validateUntilOnRuleFail property", () => {
-    const localValidator = useValidator({
-      prop: [() => true, () => "FirstMessage", () => "SecondMessage"],
-    });
-
-    localValidator.validateProperty("prop", true, 1);
-    expect(localValidator.getErrors()).toStrictEqual(["FirstMessage"]);
-
-    localValidator.validateProperty("prop", true);
-    expect(localValidator.getErrors()).toStrictEqual([
-      "FirstMessage",
-      "SecondMessage",
-    ]);
-
-    localValidator.validate({ prop: true }, 1);
-    expect(localValidator.getErrors()).toStrictEqual(["FirstMessage"]);
-
-    localValidator.validate({ prop: true });
-    expect(localValidator.getErrors()).toStrictEqual([
-      "FirstMessage",
-      "SecondMessage",
-    ]);
-  });
-});
+    validator.validate(falsy)
+    expect(validator.hasErrors()).toBeTruthy()
+  })
+})
