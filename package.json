@@ -1,7 +1,7 @@
 {
   "name": "@antify/validate",
   "private": false,
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "",
   "license": "MIT",
   "sideEffects": false,
@@ -24,6 +24,7 @@
     "lint": "eslint --ext .ts,.js,.mjs,.cjs .",
     "prepack": "unbuild",
     "release": "pnpm test && standard-version && git push --follow-tags && pnpm publish",
+    "release-minor": "pnpm test && standard-version -- --release-as minor && git push --follow-tags && pnpm publish",
     "test": "pnpm lint && vitest run"
   },
   "devDependencies": {
