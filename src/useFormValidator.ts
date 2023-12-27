@@ -12,19 +12,25 @@ export class FormValidator {
     })
   }
 
-  validate (data: Record<string, unknown | { value: unknown }>) {
+  validate (data: Record<string, any | { value: any }>): Record<string, any> {
+    const values: Record<string, any | { value: any }> = {}
+
     Object.keys(this.validatorMap).forEach((key: string) => {
       if (typeof data !== 'object' || Array.isArray(data) || !data) {
         throw new Error(`Can not validate data of type ${typeof data}`)
       }
 
       this.validateProperty(key, data[key])
+
+      values[key] = data[key]?.value !== undefined ? data[key].value : data[key]
     })
+
+    return values
   }
 
   validateProperty (
     property: string,
-    data: unknown | { value: unknown }
+    data: any | { value: any }
   ) {
     if (!this.validatorMap[property]) {
       throw new Error(`There is no field for property ${property}`)

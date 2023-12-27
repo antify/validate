@@ -105,4 +105,26 @@ describe('FormValidator test', () => {
       expect(e.message).toBe('There is no field for property notExistingOne')
     }
   })
+
+  test('should return the correct validated values', () => {
+    const _formValidator = useFormValidator({
+      truthy: {
+        rules: [val => val === true || '']
+      },
+      falsy: {
+        rules: [val => val === false || '']
+      }
+    })
+
+    const values = _formValidator.validate({
+      truthy: true,
+      falsy: ref(false),
+      withoutRule: 'string'
+    })
+
+    expect(values).toStrictEqual({
+      truthy: true,
+      falsy: false
+    })
+  })
 })
