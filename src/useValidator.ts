@@ -8,7 +8,7 @@ export class Validator {
     this.rules = typeof rules === 'function' ? [rules] : rules
   }
 
-  validate (data: any | { value: unknown }) {
+  validate (data: any | { value: any }) {
     this.errorMap = []
 
     this.rules.forEach((rule: Function) => {
