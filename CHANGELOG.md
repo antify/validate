@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/antify/validate/compare/v1.6.0...v1.7.0) (2023-12-27)
+
+
+### Features
+
+* Export fields type ([94d1490](https://github.com/antify/validate/commit/94d14906a0bcb20f43e2e6e0803234c1350ba77a))
+
 ## [1.6.0](https://github.com/antify/validate/compare/v1.5.1...v1.6.0) (2023-12-27)
 
 
