@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/antify/validate/compare/v1.4.4...v1.5.0) (2023-12-27)
+
+
+### Features
+
+* return validated values in form validator ([9c49791](https://github.com/antify/validate/commit/9c497911c494cc6c4a5839d5d6d040f2a4cbf795))
+
+
+### Bug Fixes
+
+* mixing type of any and unknown ([2a1876e](https://github.com/antify/validate/commit/2a1876e45378fc30fe903c387b08d4ebf4bdf213))
+
 ### [1.4.4](https://github.com/antify/validate/compare/v1.4.3...v1.4.4) (2023-12-27)
 
 ### [1.4.3](https://github.com/antify/validate/compare/v1.4.2...v1.4.3) (2023-10-19)
