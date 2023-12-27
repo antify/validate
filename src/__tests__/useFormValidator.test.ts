@@ -62,6 +62,7 @@ describe('FormValidator test', () => {
         'Message'
       ]
     })
+
     expect(formValidator.getErrorsAsString()).toStrictEqual('Falsy field\n- Message\nTruthy and falsy field\n- Message\nFalsy and falsy field\n- Message\n- Message')
   })
 
@@ -123,6 +124,27 @@ describe('FormValidator test', () => {
     })
 
     expect(values).toStrictEqual({
+      truthy: true,
+      falsy: false
+    })
+  })
+
+  test('should create the form values correctly', () => {
+    const _formValidator = useFormValidator({
+      truthy: {
+        rules: [val => val === true || '']
+      },
+      falsy: {
+        rules: [val => val === false || '']
+      }
+    })
+    const data = {
+      truthy: true,
+      falsy: ref(false),
+      withoutRule: 'string'
+    }
+
+    expect(_formValidator.getValues(data)).toStrictEqual({
       truthy: true,
       falsy: false
     })

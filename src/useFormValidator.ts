@@ -71,6 +71,23 @@ export class FormValidator {
 
     return stringMessage
   }
+
+  /**
+   * Return all values where a rule exists for
+   */
+  getValues (data: Record<string, any | { value: any }>): Record<string, any> {
+    const values: Record<string, any | { value: any }> = {}
+
+    Object.keys(this.validatorMap).forEach((key: string) => {
+      if (typeof data !== 'object' || Array.isArray(data) || !data) {
+        throw new Error(`Can not create form values for data of type ${typeof data}`)
+      }
+
+      values[key] = data[key]?.value !== undefined ? data[key].value : data[key]
+    })
+
+    return values
+  }
 }
 
 export const useFormValidator = (fields: Record<string, Field>) => new FormValidator(fields)
