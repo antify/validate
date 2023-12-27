@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/antify/validate/compare/v1.5.1...v1.6.0) (2023-12-27)
+
+
+### Features
+
+* Add getValues method to form validator ([6915bff](https://github.com/antify/validate/commit/6915bffc9ec74b786ab2df67f02d76bb1ef0be97))
+
 ### [1.5.1](https://github.com/antify/validate/compare/v1.5.0...v1.5.1) (2023-12-27)
 
 ## [1.5.0](https://github.com/antify/validate/compare/v1.4.4...v1.5.0) (2023-12-27)
