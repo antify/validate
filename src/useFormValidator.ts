@@ -1,11 +1,11 @@
 import { Validator } from './useValidator'
-import { Field } from './types'
+import { Field, Fields } from './types'
 
 export class FormValidator {
   readonly validatorMap: Record<string, Validator> = {}
   readonly fieldMap: Record<string, Field> = {}
 
-  constructor (fields: Record<string, Field>) {
+  constructor (fields: Fields) {
     Object.keys(fields).forEach((key) => {
       this.validatorMap[key] = new Validator(fields[key].rules)
       this.fieldMap[key] = fields[key]

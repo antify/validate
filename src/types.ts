@@ -6,3 +6,4 @@ export type Field = {
   readableName?: string,
   rules: RuleFunction | RuleFunction[]
 }
+export type Fields = Record<string, Field>
