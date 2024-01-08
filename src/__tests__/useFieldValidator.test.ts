@@ -1,8 +1,8 @@
 import { describe, test, expect, beforeEach } from 'vitest'
-import { useFieldValidator, Validator } from '../useFieldValidator'
+import { useFieldValidator, FieldValidator } from '../useFieldValidator'
 
 describe('Validator test', () => {
-  let validator: Validator
+  let validator: FieldValidator
 
   beforeEach(() => {
     validator = useFieldValidator([
