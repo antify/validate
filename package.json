@@ -8,6 +8,7 @@
   "type": "module",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
@@ -29,14 +30,12 @@
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
-    "@vue/reactivity": "^3.3.4",
     "c8": "latest",
     "eslint": "latest",
     "standard-version": "latest",
     "typescript": "latest",
     "unbuild": "latest",
-    "vitest": "latest",
-    "vue": "^3.3.4"
+    "vitest": "latest"
   },
   "packageManager": "pnpm@7.0.0",
   "repository": {
