@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/antify/validate/compare/v1.7.0...v1.8.0) (2024-01-08)
+
+
+### Features
+
+* add in depth object support ([bbb5c3b](https://github.com/antify/validate/commit/bbb5c3b445d49a7bcabbc8963d6399e55050a771))
+* Add isOneOf rule ([abb3217](https://github.com/antify/validate/commit/abb321729f9031618ed79ca7b583403eb296250c))
+* Add isOneOf rule ([a59ae9c](https://github.com/antify/validate/commit/a59ae9c9fd139a6549a7e34803852ba655f4adde))
+
+
+### Bug Fixes
+
+* fix wrong type usage ([2832541](https://github.com/antify/validate/commit/28325412b05dd52e8ccdcde03b30d5168e99dffc))
+
 ## [1.7.0](https://github.com/antify/validate/compare/v1.6.0...v1.7.0) (2023-12-27)
 
 
