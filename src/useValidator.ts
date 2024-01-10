@@ -1,5 +1,6 @@
 import { FieldValidator } from './useFieldValidator'
 import { BaseField, Field, Fields } from './types'
+import { hasGroup } from './utils'
 
 type ValidType = Record<string, any>
 type FieldMapField = BaseField & {
@@ -39,11 +40,11 @@ export class Validator<V = ValidType> {
     this.fieldMap = generateFieldMap(fields)
   }
 
-  validate (data: any, group?: string): V {
-    const validateInDepth = <T = Partial<ValidType>> (fieldMap: FieldMap, data: any, values: T, group?: string): T => {
+  validate<T> (data: any, group?: string | string[]): V {
+    const validateInDepth = <T = Partial<ValidType>>(fieldMap: FieldMap, data: any, values: T, group?: string | string[]): T => {
       Object.keys(fieldMap).forEach((key) => {
         if (fieldMap[key]._isField) {
-          if (group && fieldMap[key].group !== group) {
+          if (!hasGroup(group, fieldMap[key]?.group)) {
             return
           }
 

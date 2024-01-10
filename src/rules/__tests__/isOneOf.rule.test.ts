@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest'
 import { isOneOfRule } from '../isOneOf.rule'
 
 describe('Is one of rule test', () => {
-  test('should validate correctly', () => {
+  test('Should validate correctly', () => {
     expect(isOneOfRule('bar', ['foo', 'bar'])).toBeTruthy()
     expect(isOneOfRule('baz', ['foo', 'bar'])).toBe('"baz" is not one of ["foo","bar"]')
 

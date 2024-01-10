@@ -2,6 +2,7 @@ import { describe, test, expect, beforeEach } from 'vitest'
 import { useValidator, Validator } from '../useValidator'
 
 describe('Validator test', () => {
+  const ruleFunction = val => val === true || 'Value is not true'
   let validator: Validator<{
     firstFormGroupFirstItem: boolean
     firstFormGroupSecondItem: boolean
@@ -20,29 +21,29 @@ describe('Validator test', () => {
     validator = useValidator({
       first: {
         readableName: 'First',
-        rules: val => val === true || 'Value is not true'
+        rules: ruleFunction
       },
       second: {
         readableName: 'Second',
-        rules: val => val === true || 'Value is not true'
+        rules: ruleFunction
       },
       third: {
         thirdFirst: {
           readableName: 'First',
-          rules: val => val === true || 'Value is not true'
+          rules: ruleFunction
         },
         thirdSecond: {
           readableName: 'Second',
-          rules: val => val === true || 'Value is not true'
+          rules: ruleFunction
         },
         thirdThird: {
           thirdThirdFirst: {
             readableName: 'First',
-            rules: val => val === true || 'Value is not true'
+            rules: ruleFunction
           },
           thirdThirdSecond: {
             readableName: 'Second',
-            rules: val => val === true || 'Value is not true'
+            rules: ruleFunction
           }
         }
       }
@@ -63,47 +64,47 @@ describe('Validator test', () => {
     }>({
       first: {
         readableName: 'First',
-        rules: val => val === true || 'Value is not true',
+        rules: ruleFunction,
         group: 'firstGroup'
       },
       second: {
         readableName: 'Second',
-        rules: val => val === true || 'Value is not true',
+        rules: ruleFunction,
         group: 'firstGroup'
       },
       third: {
         thirdFirst: {
           readableName: 'First',
-          rules: val => val === true || 'Value is not true',
+          rules: ruleFunction,
           group: 'secondGroup'
         },
         thirdSecond: {
           readableName: 'Second',
-          rules: val => val === true || 'Value is not true',
+          rules: ruleFunction,
           group: 'secondGroup'
         },
         thirdThird: {
           thirdThirdFirst: {
             readableName: 'First',
-            rules: val => val === true || 'Value is not true',
+            rules: ruleFunction,
             group: 'secondGroup'
           },
           thirdThirdSecond: {
             readableName: 'Second',
-            rules: val => val === true || 'Value is not true',
+            rules: ruleFunction,
             group: 'anotherGroup'
           }
         }
       },
       fourth: {
         readableName: 'Fourth',
-        rules: val => val === true || 'Value is not true',
+        rules: ruleFunction,
         group: 'secondGroup'
       }
     })
   })
 
-  test('should validate correct values correctly', () => {
+  test('Should validate correct values correctly', () => {
     const data = validator.validate({
       first: true,
       second: true,
@@ -137,7 +138,7 @@ describe('Validator test', () => {
     expect(validator.getErrorsAsString()).toStrictEqual('')
   })
 
-  test('should validate missing values correctly', () => {
+  test('Should validate missing values correctly', () => {
     [true, false, 'string', 10, 0.0, ['content'],
       null, undefined, {}, { wrong: 'field' }].forEach((val: unknown) => {
       const data = validator.validate(val)
@@ -185,7 +186,7 @@ describe('Validator test', () => {
     })
   })
 
-  test('should emit and show errors correctly', () => {
+  test('Should emit and show errors correctly', () => {
     const data = validator.validate({
       first: true,
       second: false,
@@ -224,7 +225,7 @@ describe('Validator test', () => {
     expect(validator.getErrorsAsString()).toStrictEqual('Second\n- Value is not true\nSecond\n- Value is not true')
   })
 
-  test('should validate groups correct', () => {
+  test('Should validate groups correct', () => {
     const data = groupedValidator.validate({
       first: true,
       second: true,
@@ -254,7 +255,7 @@ describe('Validator test', () => {
     expect(validator.getErrorsAsString()).toStrictEqual('')
   })
 
-  test('should emit and show errors for groups correct', () => {
+  test('Should emit and show errors for groups correct', () => {
     const data = groupedValidator.validate({
       first: false,
       second: false,
@@ -302,7 +303,7 @@ describe('Validator test', () => {
       'First\n- Value is not true\nFourth\n- Value is not true')
   })
 
-  test('should reset correctly', () => {
+  test('Should reset correctly', () => {
     const data = validator.validate({
       first: false,
       second: false,

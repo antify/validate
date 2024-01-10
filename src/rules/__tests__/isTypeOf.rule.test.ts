@@ -37,7 +37,7 @@ describe('Is type of rule test', () => {
     ['with content']
   ]
 
-  test('should validate type of string correctly', () => {
+  test('Should validate type of string correctly', () => {
     [
       ...listOfObjects,
       ...listOfArrays,
@@ -49,7 +49,7 @@ describe('Is type of rule test', () => {
     listOfStrings.forEach(value => expect(isTypeOfRule(value, Types.STRING)).toBe(true))
   })
 
-  test('should validate type of number correctly', () => {
+  test('Should validate type of number correctly', () => {
     [
       ...listOfObjects,
       ...listOfArrays,
@@ -61,7 +61,7 @@ describe('Is type of rule test', () => {
     listOfNumbers.forEach(value => expect(isTypeOfRule(value, Types.NUMBER)).toBe(true))
   })
 
-  test('should validate type of boolean correctly', () => {
+  test('Should validate type of boolean correctly', () => {
     [
       ...listOfObjects,
       ...listOfArrays,
@@ -73,7 +73,7 @@ describe('Is type of rule test', () => {
     listOfBooleans.forEach(value => expect(isTypeOfRule(value, Types.BOOLEAN)).toBe(true))
   })
 
-  test('should validate type of object correctly', () => {
+  test('Should validate type of object correctly', () => {
     [
       ...listOfArrays,
       ...listOfFunctions,
@@ -85,7 +85,7 @@ describe('Is type of rule test', () => {
     listOfObjects.forEach(value => expect(isTypeOfRule(value, Types.OBJECT)).toBe(true))
   })
 
-  test('should validate type of object correctly', () => {
+  test('Should validate type of object correctly', () => {
     [
       ...listOfObjects,
       ...listOfFunctions,

@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest'
 import { notBlankRule } from '../notBlank.rule'
 
 describe('Not blank rule test', () => {
-  test('should validate blank content correctly', () => {
+  test('Should validate blank content correctly', () => {
     [
       ' ',
       '    ',

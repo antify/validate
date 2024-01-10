@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest'
 import { emailRule } from '../email.rule'
 
 describe('Email rule test', () => {
-  test('should validate email correctly', () => {
+  test('Should validate email correctly', () => {
     [
       'email@example.com',
       'firstname.lastname@example.com',
