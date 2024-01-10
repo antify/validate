@@ -5,12 +5,8 @@
  * @param haystack
  */
 export function hasGroup (needle: string | string[] | undefined, haystack?: string | string[]): boolean {
-  if (needle === undefined) {
+  if (needle === undefined || haystack === undefined) {
     return true
-  }
-
-  if (haystack === undefined) {
-    return false
   }
 
   const _needle = Array.isArray(needle) ? needle : [needle]

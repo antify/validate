@@ -40,17 +40,17 @@ export class Validator<V = ValidType> {
     this.fieldMap = generateFieldMap(fields)
   }
 
-  validate<T> (data: any, group?: string | string[]): V {
-    const validateInDepth = <T = Partial<ValidType>>(fieldMap: FieldMap, data: any, values: T, group?: string | string[]): T => {
+  validate (data: any, groups?: string | string[]): V {
+    const validateInDepth = <T = Partial<ValidType>>(fieldMap: FieldMap, data: any, values: T, groups?: string | string[]): T => {
       Object.keys(fieldMap).forEach((key) => {
         if (fieldMap[key]._isField) {
-          if (!hasGroup(group, (fieldMap[key] as FieldMapField)?.group)) {
+          if (!hasGroup(groups, (fieldMap[key] as FieldMapField)?.groups)) {
             return
           }
 
-          values[key] = (fieldMap[key] as FieldMapField).validator.validate(data?.[key])
+          values[key] = (fieldMap[key] as FieldMapField).validator.validate(data?.[key], groups)
         } else {
-          const _values = validateInDepth(fieldMap[key] as FieldMap, data?.[key], values[key] || {}, group)
+          const _values = validateInDepth(fieldMap[key] as FieldMap, data?.[key], values[key] || {}, groups)
 
           if (Object.keys(_values).length > 0) {
             values[key] = _values
@@ -61,18 +61,18 @@ export class Validator<V = ValidType> {
       return values
     }
 
-    return validateInDepth<V>(this.fieldMap, data, {} as V, group)
+    return validateInDepth<V>(this.fieldMap, data, {} as V, groups)
   }
 
-  hasErrors (group?: string): boolean {
-    return Object.keys(this.getErrors(group)).length > 0
+  hasErrors (groups?: string | string[]): boolean {
+    return Object.keys(this.getErrors(groups)).length > 0
   }
 
-  getErrors (group?: string): ErrorMap {
-    const getErrorsInDepth = (fieldMap: FieldMap, errors: ErrorMap, group?: string): ErrorMap => {
+  getErrors (groups?: string | string[]): ErrorMap {
+    const getErrorsInDepth = (fieldMap: FieldMap, errors: ErrorMap): ErrorMap => {
       Object.keys(fieldMap).forEach((key) => {
         if (fieldMap[key]._isField) {
-          if (group && fieldMap[key].group !== group) {
+          if (!hasGroup(groups, (fieldMap[key] as FieldMapField).groups)) {
             return
           }
 
@@ -80,7 +80,7 @@ export class Validator<V = ValidType> {
             errors[key] = (fieldMap[key] as FieldMapField).validator.getErrors()
           }
         } else {
-          const _errors = getErrorsInDepth(fieldMap[key] as FieldMap, errors[key] as ErrorMap || {}, group)
+          const _errors = getErrorsInDepth(fieldMap[key] as FieldMap, errors[key] as ErrorMap || {})
 
           if (Object.keys(_errors).length > 0) {
             errors[key] = _errors
@@ -91,39 +91,39 @@ export class Validator<V = ValidType> {
       return errors
     }
 
-    return getErrorsInDepth(this.fieldMap, {}, group)
+    return getErrorsInDepth(this.fieldMap, {})
   }
 
   /**
    * Return all fields as a one dimensional array.
    *
-   * @param group
+   * @param groups
    */
-  getFieldsFlat (group?: string): FieldMapField[] {
-    const getFieldsInDepth = (fieldMap: FieldMap, fields: FieldMapField[] = [], group?: string): FieldMapField[] => {
+  getFieldsFlat (groups?: string | string[]): FieldMapField[] {
+    const getFieldsInDepth = (fieldMap: FieldMap, fields: FieldMapField[] = []): FieldMapField[] => {
       Object.keys(fieldMap).forEach((key) => {
         if (fieldMap[key]._isField) {
-          if (group && fieldMap[key].group !== group) {
+          if (!hasGroup(groups, (fieldMap[key] as FieldMapField).groups)) {
             return
           }
 
           fields.push(fieldMap[key] as FieldMapField)
         } else {
-          getFieldsInDepth(fieldMap[key] as FieldMap, fields, group)
+          getFieldsInDepth(fieldMap[key] as FieldMap, fields)
         }
       })
 
       return fields
     }
 
-    return getFieldsInDepth(this.fieldMap, [], group)
+    return getFieldsInDepth(this.fieldMap, [])
   }
 
-  getErrorsAsString (group?: string): string {
+  getErrorsAsString (groups?: string | string[]): string {
     const newLine = '\n'
     let stringMessage = ''
 
-    this.getFieldsFlat(group).forEach((field) => {
+    this.getFieldsFlat(groups).forEach((field) => {
       if (field.validator.hasErrors()) {
         if (stringMessage) {
           stringMessage += newLine

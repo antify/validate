@@ -15,7 +15,7 @@ describe('Validator test', () => {
       }
     }
   }>
-  let groupedValidator
+  let groupedValidator: Validator
 
   beforeEach(() => {
     validator = useValidator({
@@ -65,41 +65,53 @@ describe('Validator test', () => {
       first: {
         readableName: 'First',
         rules: ruleFunction,
-        group: 'firstGroup'
+        groups: 'firstGroup'
       },
       second: {
         readableName: 'Second',
         rules: ruleFunction,
-        group: 'firstGroup'
+        groups: 'firstGroup'
       },
       third: {
         thirdFirst: {
           readableName: 'First',
-          rules: ruleFunction,
-          group: 'secondGroup'
+          rules: [
+            ruleFunction,
+            {
+              rule: ruleFunction,
+              groups: 'anotherGroup'
+            }
+          ],
+          groups: 'secondGroup'
         },
         thirdSecond: {
           readableName: 'Second',
-          rules: ruleFunction,
-          group: 'secondGroup'
+          rules: [
+            ruleFunction,
+            {
+              rule: ruleFunction,
+              groups: 'secondGroup'
+            }
+          ],
+          groups: 'secondGroup'
         },
         thirdThird: {
           thirdThirdFirst: {
             readableName: 'First',
             rules: ruleFunction,
-            group: 'secondGroup'
+            groups: 'secondGroup'
           },
           thirdThirdSecond: {
             readableName: 'Second',
             rules: ruleFunction,
-            group: 'anotherGroup'
+            groups: 'anotherGroup'
           }
         }
       },
       fourth: {
         readableName: 'Fourth',
         rules: ruleFunction,
-        group: 'secondGroup'
+        groups: 'secondGroup'
       }
     })
   })
@@ -280,13 +292,13 @@ describe('Validator test', () => {
       },
       fourth: false
     })
-    expect(groupedValidator.hasErrors()).toBeTruthy()
     expect(groupedValidator.getErrors()).toStrictEqual({
       third: {
         thirdFirst: [
           'Value is not true'
         ],
         thirdSecond: [
+          'Value is not true',
           'Value is not true'
         ],
         thirdThird: {
@@ -299,7 +311,9 @@ describe('Validator test', () => {
         'Value is not true'
       ]
     })
-    expect(groupedValidator.getErrorsAsString()).toStrictEqual('First\n- Value is not true\nSecond\n- Value is not true\n' +
+    expect(groupedValidator.hasErrors()).toBeTruthy()
+    expect(groupedValidator.getErrorsAsString()).toStrictEqual('First\n- Value is not true\n' +
+      'Second\n- Value is not true\n- Value is not true\n' +
       'First\n- Value is not true\nFourth\n- Value is not true')
   })
 

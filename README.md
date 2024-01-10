@@ -39,7 +39,7 @@ export type Car = {
 export const validator = useValidator<Car>({
   id: {
     rules: [(val: any) => isTypeOfRule(val, Types.STRING)],
-    group: ['client']
+    groups: ['client']
   }
 })
 ```

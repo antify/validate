@@ -10,7 +10,7 @@ describe('Utils test', () => {
     expect(hasGroup(['a', 'b'], 'c')).toBeFalsy()
     expect(hasGroup(['a', 'b'], ['b', 'c', 'a'])).toBeTruthy()
     expect(hasGroup(['a', 'b'], ['c', 'd'])).toBeFalsy()
-    expect(hasGroup(['a', 'b'], undefined)).toBeFalsy()
+    expect(hasGroup(['a', 'b'], undefined)).toBeTruthy()
     expect(hasGroup(undefined, ['a', 'b'])).toBeTruthy()
     expect(hasGroup(undefined, undefined)).toBeTruthy()
   })

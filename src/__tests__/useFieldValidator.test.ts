@@ -72,28 +72,28 @@ describe('Validator test', () => {
     const validator = useFieldValidator([
       {
         rule: (val: unknown) => val === true || 'First message',
-        group: ['first']
+        groups: ['first']
       }, {
         rule: (val: unknown) => val === true || 'Second message',
-        group: 'second'
+        groups: 'second'
       }, {
         rule: (val: unknown) => val === true || 'Not defined message',
-        group: undefined
+        groups: undefined
       }, {
         rule: (val: unknown) => val === true || 'Twice message',
-        group: ['foo', 'twice']
+        groups: ['foo', 'twice']
       }, {
         rule: (val: unknown) => val === true || 'Twice message',
-        group: 'twice'
+        groups: 'twice'
       }
     ])
 
     validator.validate(false, 'first')
-    expect(validator.getErrors()).toStrictEqual(['First message'])
+    expect(validator.getErrors()).toStrictEqual(['First message', 'Not defined message'])
     expect(validator.hasErrors()).toBeTruthy()
 
     validator.validate(false, 'second')
-    expect(validator.getErrors()).toStrictEqual(['Second message'])
+    expect(validator.getErrors()).toStrictEqual(['Second message', 'Not defined message'])
     expect(validator.hasErrors()).toBeTruthy()
 
     validator.validate(false)
@@ -107,11 +107,11 @@ describe('Validator test', () => {
     expect(validator.hasErrors()).toBeTruthy()
 
     validator.validate(false, 'twice')
-    expect(validator.getErrors()).toStrictEqual(['Twice message', 'Twice message'])
+    expect(validator.getErrors()).toStrictEqual(['Not defined message', 'Twice message', 'Twice message'])
     expect(validator.hasErrors()).toBeTruthy()
 
     validator.validate(false, ['twice', 'first'])
-    expect(validator.getErrors()).toStrictEqual(['First message', 'Twice message', 'Twice message'])
+    expect(validator.getErrors()).toStrictEqual(['First message', 'Not defined message', 'Twice message', 'Twice message'])
     expect(validator.hasErrors()).toBeTruthy()
   })
 })

@@ -5,7 +5,8 @@ describe('Is required rule test', () => {
   test('Should validate correctly', () => {
     [
       null,
-      undefined
+      undefined,
+      ''
     ].forEach(value => expect(isRequiredRule(value, 'message')).toBe('message'));
 
     [

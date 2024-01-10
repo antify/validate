@@ -1,7 +1,7 @@
 export type RuleFunction = (val: any, message?: string) => true | string
 export type Rule = {
   rule: RuleFunction,
-  group?: string | string[],
+  groups?: string | string[],
 }
 export type RulesConfiguration = RuleFunction | Rule | (Rule | RuleFunction)[]
 export type BaseField = {
@@ -15,7 +15,7 @@ export type BaseField = {
    * A group can get validated together. It represents a form which is a part of multiple forms.
    * Imagine tabs, where each tab has his own form but all forms reference to one data object.
    */
-  group?: string | string[]
+  groups?: string | string[]
 }
 export type Field = BaseField & {
   rules: RulesConfiguration

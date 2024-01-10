@@ -28,11 +28,11 @@ export class FieldValidator {
     }
   }
 
-  validate (data: any, group?: string | string[]): any {
+  validate (data: any, groups?: string | string[]): any {
     this.errorMap = []
 
     this.rules.forEach((rule: Rule) => {
-      if (!hasGroup(group, rule.group)) {
+      if (!hasGroup(groups, rule.groups)) {
         return
       }
 
