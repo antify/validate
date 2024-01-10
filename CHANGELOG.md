@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/antify/validate/compare/v1.9.1...v1.10.0) (2024-01-10)
+
+
+### Features
+
+* Add isRequired-, isMongoDbObjectId- and isUUID rule ([57fe1ea](https://github.com/antify/validate/commit/57fe1ea7e0c31badda493a84dce897f30fab8e6b))
+
 ### [1.9.1](https://github.com/antify/validate/compare/v1.9.0...v1.9.1) (2024-01-10)
 
 
