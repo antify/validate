@@ -8,9 +8,8 @@ Use one validation for client and server side.
 - [x] Validation per field, custom group or all fields
 - [x] Validation for nested objects
 - [x] Fully typed
-- [x] Ships with predefined rules (See [here](https://github.com/antify/validate/tree/main/src/rules))
+- [x] Ships with predefined validation rules (See [here](https://github.com/antify/validate/tree/main/src/rules))
 - [ ] Ships with predefined and translated error messages
-- [x] Group able fields and validation rules for different contexts
 
 ## Installation
 
