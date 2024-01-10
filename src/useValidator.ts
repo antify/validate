@@ -44,11 +44,11 @@ export class Validator<V = ValidType> {
     const validateInDepth = <T = Partial<ValidType>>(fieldMap: FieldMap, data: any, values: T, group?: string | string[]): T => {
       Object.keys(fieldMap).forEach((key) => {
         if (fieldMap[key]._isField) {
-          if (!hasGroup(group, fieldMap[key]?.group)) {
+          if (!hasGroup(group, (fieldMap[key] as FieldMapField)?.group)) {
             return
           }
 
-          values[key] = (fieldMap[key].validator as FieldValidator).validate(data?.[key])
+          values[key] = (fieldMap[key] as FieldMapField).validator.validate(data?.[key])
         } else {
           const _values = validateInDepth(fieldMap[key] as FieldMap, data?.[key], values[key] || {}, group)
 
