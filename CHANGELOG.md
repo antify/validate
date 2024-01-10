@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.1](https://github.com/antify/validate/compare/v1.9.0...v1.9.1) (2024-01-10)
+
+
+### Bug Fixes
+
+* fix type error ([94f178e](https://github.com/antify/validate/commit/94f178e5b7f8cddccb711a158dc7c1157578f292))
+
 ## [1.9.0](https://github.com/antify/validate/compare/v1.8.0...v1.9.0) (2024-01-10)
 
 
