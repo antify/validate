@@ -1,4 +1,4 @@
-export type RuleFunction = (val: any) => true | string
+export type RuleFunction = (val: any, message?: string) => true | string
 export type Rule = {
   rule: RuleFunction,
   group?: string | string[],
