@@ -40,17 +40,17 @@ export class Validator<V = ValidType> {
     this.fieldMap = generateFieldMap(fields)
   }
 
-  validate (data: any, groups?: string | string[]): V {
-    const validateInDepth = <T = Partial<ValidType>>(fieldMap: FieldMap, data: any, values: T, groups?: string | string[]): T => {
+  validate (formData: any, groups?: string | string[]): V {
+    const validateInDepth = <T = Partial<ValidType>>(fieldMap: FieldMap, currentData: any, values: T, groups?: string | string[]): T => {
       Object.keys(fieldMap).forEach((key) => {
         if (fieldMap[key]._isField) {
           if (!hasGroup(groups, (fieldMap[key] as FieldMapField)?.groups)) {
             return
           }
 
-          values[key] = (fieldMap[key] as FieldMapField).validator.validate(data?.[key], groups)
+          values[key] = (fieldMap[key] as FieldMapField).validator.validate(currentData?.[key], formData, groups)
         } else {
-          const _values = validateInDepth(fieldMap[key] as FieldMap, data?.[key], values[key] || {}, groups)
+          const _values = validateInDepth(fieldMap[key] as FieldMap, currentData?.[key], values[key] || {}, groups)
 
           if (Object.keys(_values).length > 0) {
             values[key] = _values
@@ -61,7 +61,7 @@ export class Validator<V = ValidType> {
       return values
     }
 
-    return validateInDepth<V>(this.fieldMap, data, {} as V, groups)
+    return validateInDepth<V>(this.fieldMap, formData, {} as V, groups)
   }
 
   hasErrors (groups?: string | string[]): boolean {

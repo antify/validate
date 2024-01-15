@@ -4,6 +4,12 @@ import { notBlankRule } from '../notBlank.rule'
 describe('Not blank rule test', () => {
   test('Should validate blank content correctly', () => {
     [
+      'content',
+      'a',
+      '{"and": "json-content"}'
+    ].forEach(value => expect(notBlankRule(value)).toBe(true));
+
+    [
       ' ',
       '    ',
       '   ',
@@ -18,12 +24,8 @@ describe('Not blank rule test', () => {
       ['with content'],
       { with: 'property' },
       {}
-    ].forEach(value => expect(notBlankRule(value, 'message')).toBe('message'));
-
-    [
-      'content',
-      'a',
-      '{"and": "json-content"}'
-    ].forEach(value => expect(notBlankRule(value)).toBe(true))
+    ].forEach(value => expect(
+      notBlankRule(value, undefined, () => 'message')
+    ).toBe('message'))
   })
 })

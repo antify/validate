@@ -1,4 +1,12 @@
-export type RuleFunction = (val: any, message?: string) => true | string
+export type RuleFunction = (
+  val: any,
+  /**
+   * The whole unvalidated form data to validate
+   * depending on other fields in the form.
+   */
+  formData?: any,
+  messageCb?: (...args: any[]) => string
+) => true | string
 export type Rule = {
   rule: RuleFunction,
   groups?: string | string[],

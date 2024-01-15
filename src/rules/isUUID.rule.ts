@@ -12,5 +12,6 @@ const regex =
  */
 export const isUUIDRule: RuleFunction = (
   val: any,
-  message = 'Invalid UUID'
-) => (typeof val === 'string' && regex.test(val)) || message
+  formData?: any,
+  messageCb = (val: any) => 'Invalid UUID'
+) => (typeof val === 'string' && regex.test(val)) || messageCb(val)

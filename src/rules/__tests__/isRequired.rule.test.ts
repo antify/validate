@@ -4,12 +4,6 @@ import { isRequiredRule } from '../isRequired.rule'
 describe('Is required rule test', () => {
   test('Should validate correctly', () => {
     [
-      null,
-      undefined,
-      ''
-    ].forEach(value => expect(isRequiredRule(value, 'message')).toBe('message'));
-
-    [
       'content',
       ' ',
       true,
@@ -23,6 +17,14 @@ describe('Is required rule test', () => {
       ['with content'],
       { with: 'property' },
       {}
-    ].forEach(value => expect(isRequiredRule(value)).toBe(true))
+    ].forEach(value => expect(isRequiredRule(value)).toBe(true));
+
+    [
+      null,
+      undefined,
+      ''
+    ].forEach(value => expect(
+      isRequiredRule(value, undefined, () => 'message')).toBe('message')
+    )
   })
 })

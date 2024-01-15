@@ -28,7 +28,7 @@ export class FieldValidator {
     }
   }
 
-  validate (data: any, groups?: string | string[]): any {
+  validate (data: any, formData?: any, groups?: string | string[]): any {
     this.errorMap = []
 
     this.rules.forEach((rule: Rule) => {
@@ -36,7 +36,7 @@ export class FieldValidator {
         return
       }
 
-      const errorMessage = rule.rule(data)
+      const errorMessage = rule.rule(data, formData)
 
       if (typeof errorMessage === 'string') {
         this.errorMap.push(errorMessage)
@@ -71,4 +71,4 @@ export class FieldValidator {
   }
 }
 
-export const useFieldValidator = (rules: RulesConfiguration) => new FieldValidator(rules)
+export const useFieldValidator = (rules?: RulesConfiguration) => new FieldValidator(rules)

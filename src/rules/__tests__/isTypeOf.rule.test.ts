@@ -44,7 +44,9 @@ describe('Is type of rule test', () => {
       ...listOfFunctions,
       ...listOfBooleans,
       ...listOfNumbers
-    ].forEach(value => expect(isTypeOfRule(value, Types.STRING)).toBe(`${JSON.stringify(value)} is not type of ${Types.STRING}`))
+    ].forEach(value => expect(
+      isTypeOfRule(value, Types.STRING)
+    ).toBe(`${JSON.stringify(value)} is not type of ${Types.STRING}`))
 
     listOfStrings.forEach(value => expect(isTypeOfRule(value, Types.STRING)).toBe(true))
   })
@@ -56,7 +58,9 @@ describe('Is type of rule test', () => {
       ...listOfFunctions,
       ...listOfBooleans,
       ...listOfStrings
-    ].forEach(value => expect(isTypeOfRule(value, Types.NUMBER)).toBe(`${JSON.stringify(value)} is not type of ${Types.NUMBER}`))
+    ].forEach(value => expect(
+      isTypeOfRule(value, Types.NUMBER)
+    ).toBe(`${JSON.stringify(value)} is not type of ${Types.NUMBER}`))
 
     listOfNumbers.forEach(value => expect(isTypeOfRule(value, Types.NUMBER)).toBe(true))
   })
@@ -68,7 +72,9 @@ describe('Is type of rule test', () => {
       ...listOfFunctions,
       ...listOfStrings,
       ...listOfNumbers
-    ].forEach(value => expect(isTypeOfRule(value, Types.BOOLEAN)).toBe(`${JSON.stringify(value)} is not type of ${Types.BOOLEAN}`))
+    ].forEach(value => expect(
+      isTypeOfRule(value, Types.BOOLEAN)
+    ).toBe(`${JSON.stringify(value)} is not type of ${Types.BOOLEAN}`))
 
     listOfBooleans.forEach(value => expect(isTypeOfRule(value, Types.BOOLEAN)).toBe(true))
   })
@@ -80,7 +86,9 @@ describe('Is type of rule test', () => {
       ...listOfStrings,
       ...listOfNumbers,
       ...listOfBooleans
-    ].forEach(value => expect(isTypeOfRule(value, Types.OBJECT)).toBe(`${JSON.stringify(value)} is not type of ${Types.OBJECT}`))
+    ].forEach(value => expect(
+      isTypeOfRule(value, Types.OBJECT)
+    ).toBe(`${JSON.stringify(value)} is not type of ${Types.OBJECT}`))
 
     listOfObjects.forEach(value => expect(isTypeOfRule(value, Types.OBJECT)).toBe(true))
   })
@@ -92,7 +100,9 @@ describe('Is type of rule test', () => {
       ...listOfStrings,
       ...listOfNumbers,
       ...listOfBooleans
-    ].forEach(value => expect(isTypeOfRule(value, Types.ARRAY)).toBe(`${JSON.stringify(value)} is not type of ${Types.ARRAY}`))
+    ].forEach(value => expect(
+      isTypeOfRule(value, Types.ARRAY)
+    ).toBe(`${JSON.stringify(value)} is not type of ${Types.ARRAY}`))
 
     listOfArrays.forEach(value => expect(isTypeOfRule(value, Types.ARRAY)).toBe(true))
   })

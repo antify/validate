@@ -36,6 +36,8 @@ describe('Is UUID rule test', () => {
       ['with content'],
       { with: 'property' },
       {}
-    ].forEach(invalidEmail => expect(isUUIDRule(invalidEmail, 'message')).toBe('message'))
+    ].forEach(invalidEmail => expect(
+      isUUIDRule(invalidEmail, undefined, () => 'message')
+    ).toBe('message'))
   })
 })

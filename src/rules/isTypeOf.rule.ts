@@ -6,7 +6,11 @@ export enum Types {
   ARRAY = 'array',
 }
 
-export const isTypeOfRule = (val: any, type: Types, message = `${JSON.stringify(val)} is not type of ${type}`): true | string => {
+export const isTypeOfRule = (
+  val: any,
+  type: Types,
+  messageCb = (val: any, type: Types) => `${JSON.stringify(val)} is not type of ${type}`
+): true | string => {
   // eslint-disable-next-line valid-typeof
   if (typeof val === Types.OBJECT) {
     if (type === Types.ARRAY && Array.isArray(val)) {
@@ -17,9 +21,9 @@ export const isTypeOfRule = (val: any, type: Types, message = `${JSON.stringify(
       return true
     }
 
-    return message
+    return messageCb(val, type)
   }
 
   // eslint-disable-next-line valid-typeof
-  return typeof val === type ? true : message
+  return typeof val === type ? true : messageCb(val, type)
 }

@@ -25,6 +25,8 @@ describe('Is mongoDb object id rule test', () => {
       ['with content'],
       { with: 'property' },
       {}
-    ].forEach(invalidEmail => expect(isMongoDbObjectIdRule(invalidEmail, 'message')).toBe('message'))
+    ].forEach(invalidEmail => expect(
+      isMongoDbObjectIdRule(invalidEmail, undefined, () => 'message')
+    ).toBe('message'))
   })
 })

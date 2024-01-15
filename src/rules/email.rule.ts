@@ -5,5 +5,6 @@ const regex =
 
 export const emailRule: RuleFunction = (
   val: any,
-  message = 'Invalid email'
-) => (typeof val === 'string' && regex.test(val)) || message
+  formData?: any,
+  messageCb = (val: any) => 'Invalid email'
+) => (typeof val === 'string' && regex.test(val)) || messageCb(val)

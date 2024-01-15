@@ -1,8 +1,21 @@
 import { describe, test, expect } from 'vitest'
 import { useFieldValidator } from '../useFieldValidator'
+import { RuleFunction } from '../types'
 
 describe('Validator test', () => {
-  const ruleFunction = (val: unknown) => val === true || 'Message'
+  const ruleFunction: RuleFunction = (val, formData, messageCb = () => 'Message') => val === true || messageCb()
+
+  test('Should emit the RuleFunction`s params correctly', () => {
+    const validator = useFieldValidator([
+      (val, formData) => {
+        expect(val).toStrictEqual(true)
+        expect(formData).toStrictEqual(false)
+        return true
+      }
+    ])
+
+    validator.validate(true, false)
+  })
 
   test('Should validate with multiple rule functions as param correctly', () => {
     const validator = useFieldValidator([ruleFunction, ruleFunction])
@@ -88,11 +101,11 @@ describe('Validator test', () => {
       }
     ])
 
-    validator.validate(false, 'first')
+    validator.validate(false, undefined, 'first')
     expect(validator.getErrors()).toStrictEqual(['First message', 'Not defined message'])
     expect(validator.hasErrors()).toBeTruthy()
 
-    validator.validate(false, 'second')
+    validator.validate(false, undefined, 'second')
     expect(validator.getErrors()).toStrictEqual(['Second message', 'Not defined message'])
     expect(validator.hasErrors()).toBeTruthy()
 
@@ -106,11 +119,11 @@ describe('Validator test', () => {
     ])
     expect(validator.hasErrors()).toBeTruthy()
 
-    validator.validate(false, 'twice')
+    validator.validate(false, undefined, 'twice')
     expect(validator.getErrors()).toStrictEqual(['Not defined message', 'Twice message', 'Twice message'])
     expect(validator.hasErrors()).toBeTruthy()
 
-    validator.validate(false, ['twice', 'first'])
+    validator.validate(false, undefined, ['twice', 'first'])
     expect(validator.getErrors()).toStrictEqual(['First message', 'Not defined message', 'Twice message', 'Twice message'])
     expect(validator.hasErrors()).toBeTruthy()
   })

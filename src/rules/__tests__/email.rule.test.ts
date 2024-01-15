@@ -36,6 +36,8 @@ describe('Email rule test', () => {
       'just"not"right@example.com',
       // eslint-disable-next-line
       'this\ is"really"not\allowed@example.com'
-    ].forEach(invalidEmail => expect(emailRule(invalidEmail, 'message')).toBe('message'))
+    ].forEach(invalidEmail => expect(
+      emailRule(invalidEmail, undefined, () => 'message')
+    ).toBe('message'))
   })
 })
