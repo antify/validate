@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/antify/validate/compare/v1.10.0...v1.11.0) (2024-01-19)
+
+
+### Features
+
+* - rename group to groups ([e6d90f4](https://github.com/antify/validate/commit/e6d90f4e88819fbb0f5fd2fb2839251df177cb37))
+* Add possibility to validate rules depend on other rules ([74e676b](https://github.com/antify/validate/commit/74e676b19f1a2dd6f8c1204262ddb08eb47999a4))
+* improve docs ([c49e1bb](https://github.com/antify/validate/commit/c49e1bb39c9a247d0819df63050ac1aba2ed6256))
+
 ## [1.10.0](https://github.com/antify/validate/compare/v1.9.1...v1.10.0) (2024-01-10)
 
 
