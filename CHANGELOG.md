@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/antify/validate/compare/v1.11.0...v1.12.0) (2024-01-22)
+
+
+### Features
+
+* Add default value per field ([b7047e0](https://github.com/antify/validate/commit/b7047e087c108137a88d52d2cdd5e14f1b8f18e8))
+
 ## [1.11.0](https://github.com/antify/validate/compare/v1.10.0...v1.11.0) (2024-01-19)
 
 
