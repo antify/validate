@@ -124,6 +124,56 @@ if (validator.hasErrors()) {
 // Save data
 ```
 
+## Transformer
+
+You can use a transformer to transform the data before validation.
+A reusable list of transformers you can find [here](https://github.com/antify/validate/tree/main/src/transformers).
+
+### Example
+```ts
+import { validate, useValidator } from '@antify/validate';
+
+export const queryValidator = useValidator({
+  page: {
+    transform: stringToNumberTransformer,
+    rules: [(val: any) => isTypeOfRule(val, Types.NUMBER)]
+  }
+})
+
+const data = queryValidator.validate({ page: '1' });
+
+// data.page === 1
+// Rule will be successful
+```
+
+### Write your own transformer
+
+```ts
+import {validate, useValidator} from '@antify/validate';
+
+export const queryValidator = useValidator({
+  isAdmin: {
+    transform: (val) => {
+      if (typeof val === 'boolean' || val === 'true') {
+        return !!val
+      }
+
+      if (val === 'false') {
+        return false
+      }
+
+      return val
+    },
+    rules: [(val: any) => isTypeOfRule(val, Types.BOOLEAN)]
+  }
+})
+
+const data = queryValidator.validate({isAdmin: 'true'});
+
+// data.isAdmin === true
+// Rule will be successful
+```
+
 ## Development
 
 - Run `pnpm dev` to generate type stubs.

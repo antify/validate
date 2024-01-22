@@ -50,11 +50,13 @@ export class Validator<V = ValidType> {
             return
           }
 
-          values[key] = field.validator.validate(
-            field.defaultValue !== undefined && currentData?.[key] === undefined ? field.defaultValue : currentData?.[key],
-            formData,
-            groups
-          )
+          let value = field.defaultValue !== undefined && currentData?.[key] === undefined ? field.defaultValue : currentData?.[key]
+
+          if (field.transform) {
+            value = field.transform(value)
+          }
+
+          values[key] = field.validator.validate(value, formData, groups)
         } else {
           const _values = validateInDepth(fieldMap[key] as FieldMap, currentData?.[key], values[key] || {}, groups)
 

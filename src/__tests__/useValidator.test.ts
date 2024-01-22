@@ -357,4 +357,20 @@ describe('Validator test', () => {
       first: true
     })
   })
+
+  test('Should call transformers correctly', () => {
+    const _validator = useValidator({
+      first: {
+        rules: ruleFunction,
+        transform: () => true
+      }
+    })
+
+    expect(_validator.validate({
+      first: 'true'
+    })).toStrictEqual({
+      first: true
+    })
+    expect(_validator.hasErrors()).toBeFalsy()
+  })
 })

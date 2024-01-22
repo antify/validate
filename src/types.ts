@@ -12,6 +12,7 @@ export type Rule = {
   groups?: string | string[],
 }
 export type RulesConfiguration = RuleFunction | Rule | (Rule | RuleFunction)[]
+export type TransformFunction = (val: any) => any
 export type BaseField = {
   /**
    * The human-readable name. Used for error message.
@@ -30,6 +31,12 @@ export type BaseField = {
    * be injected in each rule function.
    */
   defaultValue?: any,
+
+  /**
+   * Transform the value before validating it.
+   * This is useful if you want to parse a string "1" to a number 1 for example.
+   */
+  transform?: TransformFunction
 }
 export type Field = BaseField & {
   rules: RulesConfiguration
