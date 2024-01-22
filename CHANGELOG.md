@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/antify/validate/compare/v1.12.0...v1.13.0) (2024-01-22)
+
+
+### Features
+
+* isTypeOfRule can now detect multiple types ([3ad8812](https://github.com/antify/validate/commit/3ad8812424c8a1c88ea57d8b1dd5edb36fa0e22c))
+
 ## [1.12.0](https://github.com/antify/validate/compare/v1.11.0...v1.12.0) (2024-01-22)
 
 
