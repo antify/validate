@@ -342,4 +342,19 @@ describe('Validator test', () => {
     expect(validator.getErrors()).toStrictEqual({})
     expect(validator.getErrorsAsString()).toStrictEqual('')
   })
+
+  test('Should set default values correctly', () => {
+    const _validator = useValidator({
+      first: {
+        rules: ruleFunction,
+        defaultValue: true
+      }
+    })
+    const data = _validator.validate({})
+
+    expect(_validator.hasErrors()).toBeFalsy()
+    expect(data).toStrictEqual({
+      first: true
+    })
+  })
 })

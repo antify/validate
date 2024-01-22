@@ -24,8 +24,14 @@ export type BaseField = {
    * Imagine tabs, where each tab has his own form but all forms reference to one data object.
    */
   groups?: string | string[]
+
+  /**
+   * If the value which should get validated is undefined, this defaultValue will
+   * be injected in each rule function.
+   */
+  defaultValue?: any,
 }
 export type Field = BaseField & {
   rules: RulesConfiguration
 }
-export type Fields = {[key: string]: Field | Fields}
+export type Fields = { [key: string]: Field | Fields }
