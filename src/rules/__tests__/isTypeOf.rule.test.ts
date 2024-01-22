@@ -43,7 +43,9 @@ describe('Is type of rule test', () => {
       ...listOfArrays,
       ...listOfFunctions,
       ...listOfBooleans,
-      ...listOfNumbers
+      ...listOfNumbers,
+      null,
+      undefined
     ].forEach(value => expect(
       isTypeOfRule(value, Types.STRING)
     ).toBe(`${JSON.stringify(value)} is not type of ${Types.STRING}`))
@@ -57,7 +59,9 @@ describe('Is type of rule test', () => {
       ...listOfArrays,
       ...listOfFunctions,
       ...listOfBooleans,
-      ...listOfStrings
+      ...listOfStrings,
+      null,
+      undefined
     ].forEach(value => expect(
       isTypeOfRule(value, Types.NUMBER)
     ).toBe(`${JSON.stringify(value)} is not type of ${Types.NUMBER}`))
@@ -71,7 +75,9 @@ describe('Is type of rule test', () => {
       ...listOfArrays,
       ...listOfFunctions,
       ...listOfStrings,
-      ...listOfNumbers
+      ...listOfNumbers,
+      null,
+      undefined
     ].forEach(value => expect(
       isTypeOfRule(value, Types.BOOLEAN)
     ).toBe(`${JSON.stringify(value)} is not type of ${Types.BOOLEAN}`))
@@ -85,7 +91,9 @@ describe('Is type of rule test', () => {
       ...listOfFunctions,
       ...listOfStrings,
       ...listOfNumbers,
-      ...listOfBooleans
+      ...listOfBooleans,
+      null,
+      undefined
     ].forEach(value => expect(
       isTypeOfRule(value, Types.OBJECT)
     ).toBe(`${JSON.stringify(value)} is not type of ${Types.OBJECT}`))
@@ -93,17 +101,66 @@ describe('Is type of rule test', () => {
     listOfObjects.forEach(value => expect(isTypeOfRule(value, Types.OBJECT)).toBe(true))
   })
 
-  test('Should validate type of object correctly', () => {
+  test('Should validate type of array correctly', () => {
     [
       ...listOfObjects,
       ...listOfFunctions,
       ...listOfStrings,
       ...listOfNumbers,
-      ...listOfBooleans
+      ...listOfBooleans,
+      null,
+      undefined
     ].forEach(value => expect(
       isTypeOfRule(value, Types.ARRAY)
     ).toBe(`${JSON.stringify(value)} is not type of ${Types.ARRAY}`))
 
     listOfArrays.forEach(value => expect(isTypeOfRule(value, Types.ARRAY)).toBe(true))
+  })
+
+  test('Should validate type of null correctly', () => {
+    [
+      ...listOfObjects,
+      ...listOfArrays,
+      ...listOfFunctions,
+      ...listOfStrings,
+      ...listOfNumbers,
+      ...listOfBooleans,
+      undefined
+    ].forEach(value => expect(
+      isTypeOfRule(value, Types.NULL)
+    ).toBe(`${JSON.stringify(value)} is not type of ${Types.NULL}`))
+
+    expect(isTypeOfRule(null, Types.NULL)).toBe(true)
+  })
+
+  test('Should validate type of undefined correctly', () => {
+    [
+      ...listOfObjects,
+      ...listOfArrays,
+      ...listOfFunctions,
+      ...listOfStrings,
+      ...listOfNumbers,
+      ...listOfBooleans,
+      null
+    ].forEach(value => expect(
+      isTypeOfRule(value, Types.UNDEFINED)
+    ).toBe(`${JSON.stringify(value)} is not type of ${Types.UNDEFINED}`))
+
+    expect(isTypeOfRule(undefined, Types.UNDEFINED)).toBe(true)
+  })
+
+  test('Should validate with multiple types correctly', () => {
+    [
+      ...listOfObjects,
+      ...listOfArrays,
+      ...listOfFunctions,
+      ...listOfStrings,
+      ...listOfBooleans,
+      undefined
+    ].forEach(value => expect(
+      isTypeOfRule(value, [Types.NULL, Types.NUMBER])
+    ).toBe(`${JSON.stringify(value)} is not type of ${Types.NULL} | ${Types.NUMBER}`));
+
+    [...listOfNumbers, null].forEach(value => expect(isTypeOfRule(value, [Types.NULL, Types.NUMBER])).toBe(true))
   })
 })
