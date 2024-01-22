@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.0](https://github.com/antify/validate/compare/v1.13.0...v1.14.0) (2024-01-22)
+
+
+### Features
+
+* - Add transformer logic ([66dbca1](https://github.com/antify/validate/commit/66dbca16327b44f2e0c7f987c3e1cea3f2829781))
+
 ## [1.13.0](https://github.com/antify/validate/compare/v1.12.0...v1.13.0) (2024-01-22)
 
 
